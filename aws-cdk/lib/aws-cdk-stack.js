@@ -1,6 +1,6 @@
 const {Stack} = require('aws-cdk-lib');
 const s3 = require('aws-cdk-lib/aws-s3');
-const iam = require('aws-cdk-lib/aws-iam');
+const cloudFront = require('aws-cdk-lib/aws-cloudfront');
 
 class NexScoreAppStack extends Stack {
   constructor(scope, id, props) {
@@ -10,18 +10,23 @@ class NexScoreAppStack extends Stack {
       bucketName: 'nexscore-app',
       deletionPolicy: 'Retain',
       websiteIndexDocument: 'index.html',
-      blockPublicAccess: new s3.BlockPublicAccess({restrictPublicBuckets: false}),
     });
 
-    const bucketPolicy = new iam.PolicyStatement({
-      actions: ['s3:GetObject'],
-      resources: [
-        `${bucket.bucketArn}/*`,
+    const cloudFrontOAI = new cloudFront.OriginAccessIdentity(this, 'OAI');
+
+    new cloudFront.CloudFrontWebDistribution(this, 'CloudfrontDistribution', {
+      originConfigs: [
+        {
+          s3OriginSource: {
+            s3BucketSource: bucket,
+            originAccessIdentity: cloudFrontOAI,
+          },
+          behaviors: [{isDefaultBehavior: true}],
+        },
       ],
-      principals: [new iam.Anyone()],
     });
 
-    bucket.addToResourcePolicy(bucketPolicy);
+    bucket.grantRead(cloudFrontOAI.grantPrincipal);
   }
 }
 
