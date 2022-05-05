@@ -43,7 +43,8 @@ jobs:
         run: |
           npm install
           npm run build
-      - uses: actions/upload-artifact@v3
+      - name: Upload built app
+        uses: actions/upload-artifact@v3
         with:
           name: app-build
           path: build
@@ -71,12 +72,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Download a single artifact
+      - name: Download built app
         uses: actions/download-artifact@v3
         with:
           name: app-build
           path: build
-      - run: |
+      - name: Upload app
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
           npm install
           npm install -g aws-cdk
           aws s3 cp build s3://nexscore-app/ --recursive --region eu-central-1
