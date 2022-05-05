@@ -1,5 +1,5 @@
 import './App.css';
-import Blank from './App.test'
+import React from 'react';
 
 function App() {
   return (
