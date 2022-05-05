@@ -18,7 +18,8 @@
         "react"
     ],
     "rules": {
-        "require-jsdoc": 0
+        "require-jsdoc": 0,
+        "max-len": ["error", 120]
     },
     "settings": {
         "react": {
