@@ -24,4 +24,4 @@ jobs:
       - name: Setup npm
         run: npm install
       - name: Run tests
-        run: npm test
+        run: npm test -- --watchAll=false
