@@ -15,4 +15,4 @@ jobs:
       - name: Setup npm
         run: npm install
       - name: Run linter
-        run: eslint . -- --watchAll=false
+        run: npx eslint . -- --watchAll=false
