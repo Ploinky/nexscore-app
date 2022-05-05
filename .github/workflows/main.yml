@@ -25,11 +25,12 @@ jobs:
       - name: Setup npm
         run: |
           npm install
-          npm install -g aws-cdk
       - name: Run react tests
         run: npm test -- --watchAll=false
       - name: Run cdk tests
         working-directory: ./aws-cdk
+          npm install -g aws-cdk
+          npm install aws-cdk-lib
         run: npm test
 
   build:
