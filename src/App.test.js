@@ -7,12 +7,15 @@ beforeEach(() => {
 });
 
 test('scoreboard', async () => {
-  fetch.mockResponseOnce(JSON.stringify([{ puuid: '123', name: 'playername' }]));
+  fetch.mockResponseOnce(JSON.stringify([{ puuid: '123', name: 'playername' },
+    {puuid: '321', name: 'nameplayer2'}]));
 
   render(<ScoreBoard/>);
 
   await waitFor(() => screen.getByText('playername'));
 
-  const linkElement = screen.getByText(/playername/i);
-  expect(linkElement).toBeInTheDocument();
+  const playername = screen.getByText(/playername/i);
+  expect(playername).toBeInTheDocument();
+  const nameplayer2 = screen.getByText(/nameplayer2/i);
+  expect(nameplayer2).toBeInTheDocument();
 });
