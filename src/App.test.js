@@ -7,7 +7,7 @@ beforeEach(() => {
 });
 
 test('scoreboard', async () => {
-  fetch.mockResponseOnce(JSON.stringify([{ puuid: '123', name: 'playername' },
+  fetch.mockResponseOnce(JSON.stringify([{puuid: '123', name: 'playername'},
     {puuid: '321', name: 'nameplayer2'}]));
 
   render(<ScoreBoard/>);

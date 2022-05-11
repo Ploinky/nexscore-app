@@ -12,7 +12,7 @@ const ScoreBoard = ({players}) => {
           setData({players: data, isLoaded: true});
         });
   }, []);
-  
+
   const playerList = [];
 
   data.players?.forEach((player, index) => {
