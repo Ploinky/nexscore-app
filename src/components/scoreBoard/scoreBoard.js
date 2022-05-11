@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ScoreBoard({players}) {
-  return (<></>);
+const ScoreBoard = ({players}) => {
+  const playerList = [];
+
+  players.forEach((player, index) => {
+    playerList.push(<span key={index}>{player.name}</span>);
+  });
+
+  return (<>{playerList}</>);
 };
 
 export default ScoreBoard;
