@@ -1,20 +1,18 @@
-import {render, screen} from '@testing-library/react';
-import App from './App';
+import {render, screen, waitFor} from '@testing-library/react';
 import React from 'react';
-import nock from 'nock';
+import ScoreBoard from './components/scoreBoard/scoreBoard';
 
-test('renders without crashing', () => {
-  const scope = nock('http://nexscore-env.eba-yxxpis3z.eu-central-1.elasticbeanstalk.com')
-  .get('/players')
-  .reply(200, {
-    players: [{ puuid: 1, name: 'playername' }]
-  }, {
-    'Access-Control-Allow-Origin': '*',
-    'Content-type': 'application/json'
-  });
+beforeEach(() => {
+  fetch.resetMocks();
+});
 
+test('scoreboard', async () => {
+  fetch.mockResponseOnce(JSON.stringify([{ puuid: '123', name: 'playername' }]));
 
-  render(<App />);
+  render(<ScoreBoard/>);
+
+  await waitFor(() => screen.getByText('playername'));
+
   const linkElement = screen.getByText(/playername/i);
   expect(linkElement).toBeInTheDocument();
 });
