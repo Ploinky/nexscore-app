@@ -1,9 +1,16 @@
 import {render, screen, waitFor} from '@testing-library/react';
 import React from 'react';
+import App from './App';
 import ScoreBoard from './components/scoreBoard/scoreBoard';
 
 beforeEach(() => {
   fetch.resetMocks();
+});
+
+test('App is rendered without error', () => {
+  fetch.mockResponseOnce(JSON.stringify([]));
+
+  render(<App/>);
 });
 
 test('scoreboard', async () => {

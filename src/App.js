@@ -4,7 +4,7 @@ import ScoreBoard from './components/scoreBoard/scoreBoard';
 
 function App() {
   return (
-    <ScoreBoard players={data.players}/>
+    <ScoreBoard/>
   );
 }
 
