@@ -6,7 +6,7 @@ const ScoreBoard = ({players}) => {
   const [data, setData] = useState({players: [], isLoaded: false});
 
   useEffect(() => {
-    fetch('http://nexscore-env.eba-yxxpis3z.eu-central-1.elasticbeanstalk.com/players')
+    fetch('https://api.ploinky.de/players')
         .then((response) => response.json())
         .then((data) => {
           setData({players: data, isLoaded: true});
