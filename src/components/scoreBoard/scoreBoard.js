@@ -23,7 +23,11 @@ const ScoreBoard = ({players}) => {
     return <div><h1> Please wait some time.... </h1> </div>;
   }
 
-  return (<ul>{playerList}</ul>);
+  return (
+    <div>
+      <ul>{playerList}</ul>
+    </div>
+  );
 };
 
 export default ScoreBoard;
