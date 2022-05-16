@@ -16,14 +16,14 @@ const ScoreBoard = ({players}) => {
   const playerList = [];
 
   data.players?.forEach((player, index) => {
-    playerList.push(<span key={index}>{player.name}</span>);
+    playerList.push(<li key={index}>{player.name}</li>);
   });
 
   if (!data.isLoaded) {
     return <div><h1> Please wait some time.... </h1> </div>;
   }
 
-  return (<>{playerList}</>);
+  return (<ul>{playerList}</ul>);
 };
 
 export default ScoreBoard;
