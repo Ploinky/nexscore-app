@@ -1,9 +1,14 @@
-import './App.css';
 import React from 'react';
+import ScoreBoard from './components/scoreBoard/scoreBoard';
+import PlayerInput from './components/playerInput/playerInput';
+import styles from './App.module.scss';
 
 function App() {
   return (
-    <span>Hello world!</span>
+    <main className={styles.main}>
+      <ScoreBoard/>
+      <PlayerInput/>
+    </main>
   );
 }
 
