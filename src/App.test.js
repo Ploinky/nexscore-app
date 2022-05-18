@@ -14,10 +14,10 @@ test('App is rendered without error', () => {
 });
 
 test('scoreboard', async () => {
-  fetch.mockResponseOnce(JSON.stringify([{puuid: '123', name: 'playername'},
-    {puuid: '321', name: 'nameplayer2'}]));
+  const data = {players: [{puuid: '123', name: 'playername'},
+    {puuid: '321', name: 'nameplayer2'}], isLoaded: true};
 
-  render(<ScoreBoard/>);
+  render(<ScoreBoard data={data}/>);
 
   await waitFor(() => screen.getByText('playername'));
 
