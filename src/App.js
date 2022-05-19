@@ -11,11 +11,12 @@ function App() {
   function onPlayerAdd(name) {
     fetch(`https://api.ploinky.de/player?name=${name}`, {
       method: 'post',
-      headers: {'Content-Type': 'application/json'},
     })
         .then(function(res) {
           if (res.status != 200) {
-            setError('Encountered an error while trying to add a player.');
+            res.json().then(function(json) {
+              setError('Encountered an error while trying to add a player: ' + json.message + '.');
+            });
           } else {
             setError('');
             fetchData();
