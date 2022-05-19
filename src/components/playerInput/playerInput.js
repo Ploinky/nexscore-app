@@ -11,7 +11,7 @@ const PlayerInput = ({error, onPlayerAdd}) => {
     <div className={styles.playerInputContainer}>
       <div>
         <input id='playerName' type="text"/>
-        <button onClick={createPlayer}>Create player</button>
+        <button data-testid='button' onClick={createPlayer}>Create player</button>
       </div>
       {error ? <span className={styles.error}>{error}</span> : ''}
     </div>
