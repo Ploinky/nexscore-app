@@ -1,25 +1,10 @@
 import React from 'react';
-import {useState} from 'react';
 import styles from './playerInput.module.scss';
+import PropTypes from 'prop-types';
 
-const PlayerInput = () => {
-  const [error, setError] = useState('');
-
+const PlayerInput = ({error, onPlayerAdd}) => {
   function createPlayer() {
-    const name = document.getElementById('playerName').value;
-    fetch(`https://api.ploinky.de/player?name=${name}`, {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-    })
-        .then(function(res) {
-          if (res.status != 200) {
-            setError('Encountered an error while trying to add a player.');
-          } else {
-            setError('');
-          }
-          console.log(res);
-        });
-    document.getElementById('playerName').value = '';
+    onPlayerAdd(document.getElementById('playerName').value);
   };
 
   return (
@@ -34,3 +19,8 @@ const PlayerInput = () => {
 };
 
 export default PlayerInput;
+
+PlayerInput.propTypes = {
+  error: PropTypes.string,
+  onPlayerAdd: PropTypes.func,
+};
